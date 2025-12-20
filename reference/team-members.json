@@ -1,0 +1,169 @@
+{
+  "team_members": {
+    "jacob": {
+      "full_name": "Jacob Brain",
+      "clickup_id": "88463944",
+      "email": "jacob@arachnidworks.com",
+      "role": "Owner/Program Manager",
+      "department": "Leadership"
+    },
+    "kenny": {
+      "full_name": "Kenneth Green III",
+      "clickup_id": "38172335",
+      "email": "kenny@arachnidworks.com",
+      "role": "Account Manager",
+      "department": "Accounts"
+    },
+    "alexis": {
+      "full_name": "Alexis Andrukat",
+      "clickup_id": "82436922",
+      "email": "alexis@arachnidworks.com",
+      "role": "Account Manager",
+      "department": "Accounts"
+    },
+    "lulu": {
+      "full_name": "Lulu Burroughs",
+      "clickup_id": "82436897",
+      "email": "lulu@arachnidworks.com",
+      "role": "Marketing Assistant",
+      "department": "Administration"
+    },
+    "mackenzie": {
+      "full_name": "Mackenzie Clark",
+      "clickup_id": "82436887",
+      "email": "mackenzie@arachnidworks.com",
+      "role": "Account Manager",
+      "department": "Accounts"
+    },
+    "madelyn": {
+      "full_name": "Madelyn Marks",
+      "clickup_id": "88287888",
+      "email": "madelyn@arachnidworks.com",
+      "role": "Account Manager",
+      "department": "Accounts"
+    },
+    "monica": {
+      "full_name": "Monica Kolbay",
+      "clickup_id": "90221728",
+      "email": "monica@arachnidworks.com",
+      "role": "Account Manager",
+      "department": "Accounts"
+    },
+    "dillon": {
+      "full_name": "Dillon Miller",
+      "clickup_id": null,
+      "email": "dillon@arachnidworks.com",
+      "role": "Account Manager",
+      "department": "Accounts",
+      "note": "Reports to Monica Kolbay"
+    },
+    "drew": {
+      "full_name": "Drew Ahrens",
+      "clickup_id": "82402149",
+      "email": "drew@arachnidworks.com",
+      "role": "Web & Graphic Designer",
+      "department": "Creative"
+    },
+    "elva": {
+      "full_name": "Elva Huang",
+      "clickup_id": "82456952",
+      "email": "elva@arachnidworks.com",
+      "role": "Web & Graphic Designer",
+      "department": "Creative"
+    },
+    "mark": {
+      "full_name": "Mark Wisniewski",
+      "clickup_id": "82456951",
+      "email": "mark@arachnidworks.com",
+      "role": "Web & Graphic Designer",
+      "department": "Creative"
+    },
+    "mike": {
+      "full_name": "Mike Apicella",
+      "clickup_id": "82410541",
+      "email": "mike@arachnidworks.com",
+      "role": "Web Developer",
+      "department": "Development"
+    },
+    "david": {
+      "full_name": "David Mudge",
+      "clickup_id": "82456953",
+      "email": "david@arachnidworks.com",
+      "role": "Web Developer",
+      "department": "Development"
+    },
+    "john": {
+      "full_name": "John Grgurich",
+      "clickup_id": "82451349",
+      "email": "john@arachnidworks.com",
+      "role": "Copywriter",
+      "department": "Digital"
+    },
+    "brett": {
+      "full_name": "Brett Thompson",
+      "clickup_id": "82457263",
+      "email": "brett@arachnidworks.com",
+      "role": "Copywriter",
+      "department": "Digital"
+    },
+    "brent": {
+      "full_name": "Brent Harwood",
+      "clickup_id": "82451347",
+      "email": "brent@arachnidworks.com",
+      "role": "Digital Marketing Lead Gen Specialist",
+      "department": "Digital"
+    },
+    "sam": {
+      "full_name": "Samantha Mooney",
+      "clickup_id": "82451345",
+      "email": "samantha@arachnidworks.com",
+      "role": "Digital Marketing Associate",
+      "department": "Digital"
+    },
+    "dylan": {
+      "full_name": "Dylan Hyman",
+      "clickup_id": "82451344",
+      "email": "dylan@arachnidworks.com",
+      "role": "Brand/Product Management & Digital Marketing",
+      "department": "Digital",
+      "status": "Part-Time"
+    },
+    "maddy": {
+      "full_name": "Maddy McClellan",
+      "clickup_id": "82484435",
+      "email": "maddy@arachnidworks.com",
+      "role": "Social Media Marketer",
+      "department": "Digital"
+    },
+    "brian": {
+      "full_name": "Brian Kolbay",
+      "clickup_id": "82400995",
+      "email": "brian@arachnidworks.com",
+      "role": "Operations",
+      "department": "Operations"
+    },
+    "taylor": {
+      "full_name": "Taylor Butler",
+      "clickup_id": "88443118",
+      "email": "taylor@arachnidworks.com",
+      "role": "Team Member",
+      "department": "Operations"
+    }
+  },
+
+  "roles": {
+    "account_managers": ["kenny", "alexis", "mackenzie", "madelyn", "monica", "dillon"],
+    "designers": ["drew", "elva", "mark"],
+    "developers": ["mike", "david"],
+    "copywriters": ["john", "brett"],
+    "digital_marketing": ["brent", "sam", "dylan", "maddy"],
+    "leadership": ["jacob", "brian"]
+  },
+
+  "aliases": {
+    "ken": "kenny",
+    "mack": "mackenzie",
+    "samantha": "sam",
+    "johnny": "john"
+  }
+}
