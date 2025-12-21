@@ -6,19 +6,48 @@ When Claude Code starts in this directory, automatically perform these checks:
 
 1. **Pull Latest Updates**: Run `git pull` to ensure you have the latest agent knowledge and reference data.
 
-2. **Verify Environment**: Check that `.env` file exists and contains required values:
-   - `CLICKUP_API_KEY` - must be set (not empty or placeholder)
-   - `CLICKUP_TEAM_ID` - must be set
+2. **Check ClickUp MCP Status**: Run `claude mcp list` to verify the ClickUp MCP connection:
+   - If it shows `✓ Connected` - ready to go
+   - If it shows `⚠ Needs authentication` - instruct user to run `/mcp` to authenticate with ClickUp via OAuth
+   - If the clickup MCP is missing entirely, add it with:
+     ```
+     claude mcp add --transport http clickup https://mcp.clickup.com/mcp -s project
+     ```
 
-   If `.env` is missing, instruct user to run: `cp .env.example .env` and edit with their API key.
+3. **Check User Identity**: Check if `.claude/user.json` exists.
+   - **If it exists**: Read the file to get the user's name, role, ClickUp ID, and any preferences. Apply preferences throughout the session.
+   - **If it does NOT exist**:
+     1. Ask: "What's your first name? (I'll remember this for future sessions)"
+     2. Look up their name in `reference/team-members.json` (check keys and aliases)
+     3. If found, create `.claude/user.json` with their info:
+        ```json
+        {
+          "name": "kenny",
+          "full_name": "Kenneth Green III",
+          "clickup_id": "38172335",
+          "role": "Account Manager"
+        }
+        ```
+     4. If not found in team roster, ask them to confirm their full name and role, then create the file without a ClickUp ID
+     5. Confirm: "Got it, [Full Name]! I've saved your info for future sessions."
 
-3. **Confirm ClickUp Connection**: Attempt a simple ClickUp API call (like listing spaces) to verify the MCP is connected and credentials work. If it fails, report the error clearly.
+   **Optional Preferences**: Users can add a `preferences` object to customize behavior:
+   ```json
+   "preferences": {
+     "default_status": "Gearing Up",
+     "compact_confirmations": true
+   }
+   ```
+   - `default_status`: Status to use when not specified (default: ask user)
+   - `compact_confirmations`: Use shorter confirmation prompts for experienced users
 
 4. **Display Status**: Show a brief startup message:
    ```
    === AW PM Agent ===
+   User: [Full Name] ([Role])
+   Today: [Current date from context, e.g., December 21, 2025]
    Git: [up to date / X commits behind]
-   ClickUp: [Connected / Not connected - reason]
+   ClickUp: [Connected / Needs auth / Not configured]
    Ready to help with task creation.
    ```
 
@@ -73,6 +102,36 @@ Reference the knowledge files in this repository to provide guidance on:
 - Status definitions and workflow
 - Spec'ing tasks properly
 - Managing workload and capacity
+
+### When Someone Asks About Availability
+
+Users may ask things like "when does John have time next week?" or "find me an hour for Kenny this week" when scheduling a task.
+
+1. **Identify the person** - Match name to `reference/team-members.json` to get their ClickUp user ID
+2. **Identify the time needed** - How long is the task they're trying to schedule?
+3. **Identify the date range** - What days are they considering?
+4. **Search for existing tasks** - Use `clickup_search` with:
+   - `assignees`: [user's ClickUp ID]
+   - `due_date_from` / `due_date_to`: the date range
+   - `filters.task_statuses`: ["active", "unstarted"] (Ready, In Progress, etc.)
+5. **Calculate availability** - For each day, sum existing time estimates and compare to ~6-7 hour capacity
+6. **Recommend dates** - Show which days have room for the new task
+
+**Example:**
+```
+User: I need to schedule 2 hours for John next week for a blog post.
+
+Agent: Let me check John's availability next week...
+
+John's availability (Mon-Fri):
+- Monday: 4h scheduled → 2-3h available ✓
+- Tuesday: 7h scheduled → at capacity
+- Wednesday: 3h scheduled → 3-4h available ✓
+- Thursday: 6h scheduled → limited availability
+- Friday: 2h scheduled → 4-5h available ✓
+
+Monday, Wednesday, or Friday would work best. Which day should I use?
+```
 
 ## Key Principles to Enforce
 

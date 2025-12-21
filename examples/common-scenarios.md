@@ -8,20 +8,31 @@ Example interactions showing how the PM Agent handles various task creation and 
 ```
 User: Create a task for ToP to write a blog post about maximizing credit card rewards, due next Friday, assign to John
 
-Agent: Creating task in Travel on Points list...
+Agent: I can help with that. A few quick questions:
+1. What's the time estimate for John?
+2. Any target word count or SEO keywords to include in the spec?
+3. Should this start in "Ready" or "Gearing Up"?
 
-Task created:
-- **Name**: Write blog post: Maximizing credit card rewards
-- **List**: ToP (Travel on Points)
-- **Assignee**: John Grgurich
-- **Due Date**: [next Friday's date]
-- **Status**: Gearing Up
+User: About 2 hours, no specific keywords, put it in Ready.
 
-Quick questions to finalize:
-1. Any target word count or SEO keywords?
-2. Should I add a review subtask for the AM?
-3. Ready to move to "Ready" status, or keep in "Gearing Up" for spec refinement?
+Agent: Got it. Here's the task I'll create:
 
+**Task**: Write blog post: Maximizing credit card rewards
+**List**: ToP (Travel on Points)
+**Assignee**: John Grgurich
+**Due Date**: [next Friday's date]
+**Estimate**: 2 hours
+**Status**: Ready
+**Description**:
+CONTEXT: Monthly content for Travel on Points blog.
+INSTRUCTIONS: Write blog post about maximizing credit card rewards.
+EXPECTED OUTPUT: Draft in Google Doc, ready for AM review.
+
+Shall I create this?
+
+User: Yes
+
+Agent: Done! Task created.
 [Task link]
 ```
 
@@ -29,16 +40,20 @@ Quick questions to finalize:
 ```
 User: Add an internal meeting for tomorrow at 2pm, 1 hour, I'm facilitating
 
-Agent: Creating internal meeting task...
+Agent: Here's what I'll create:
 
-Task created:
-- **Name**: Internal Meeting - [tomorrow's date]
-- **List**: Internal Meetings
-- **Assignee**: [user]
-- **Due Date**: [tomorrow]
-- **Time Estimate**: 1 hour
-- **Status**: Ready
+**Task**: Internal Meeting - [tomorrow's date]
+**List**: Internal Meetings
+**Assignee**: [user]
+**Due Date**: [tomorrow]
+**Estimate**: 1 hour
+**Status**: Ready
 
+Shall I create this?
+
+User: Yes
+
+Agent: Done! Task created.
 [Task link]
 ```
 
@@ -66,21 +81,32 @@ Agent: **Expected Output**: Design only, or design + development? Any specific c
 
 User: Full build to staging. Goal is demo requests via the form.
 
-Agent: Perfect. I'll create the parent task with subtasks for each phase:
+Agent: Perfect. Here's the task structure I'll create:
 
 **Parent Task**: PMI DewPoint Landing Page
-- Due: [suggest date based on complexity]
-- Status: Gearing Up (waiting on copy)
+**List**: PMI (Phoenix Mecano)
+**Due**: [suggest date based on complexity]
+**Status**: Gearing Up (waiting on copy)
+**Description**:
+CONTEXT: Landing page for Q1 DewPoint sensor product launch. Goal is demo requests via contact form.
+INSTRUCTIONS: Follow existing PMI brand guide. Include hero section, features grid, specs table, and contact form. Match current site style.
+RESOURCES: Copy doc (in progress), product images on client shared drive.
+EXPECTED OUTPUT: Full build deployed to staging with working contact form.
 
 **Subtasks**:
 1. Wireframe/Layout Planning - Drew - 2h
-2. Visual Design - Drew - 4h  
-3. Copy Integration - John - 2h (blocked until copy ready)
+2. Visual Design - Drew - 4h
+3. Copy Integration - John - 2h (waiting on copy doc)
 4. Development - Mike - 4h
 5. QA & Testing - [AM] - 1h
 6. Client Review - [AM] - 1h
 
-Should I create this structure? Any adjustments to the subtask breakdown or assignments?
+Does this look correct? Any adjustments before I create it?
+
+User: Looks good, create it.
+
+Agent: Done! Parent task and 6 subtasks created.
+[Parent task link]
 ```
 
 ## Task Updates

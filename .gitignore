@@ -21,4 +21,6 @@ Thumbs.db
 # Environment/secrets
 .env
 .env.*
-!.env.example
+
+# Local Claude config (user identity, etc.)
+.claude/

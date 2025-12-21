@@ -21,23 +21,21 @@ This agent helps Account Managers quickly create well-structured tasks in ClickU
    cd aw-pm-agent
    ```
 
-2. **Create your environment file**:
-   ```bash
-   cp .env.example .env
-   ```
-
-3. **Edit `.env`** with your ClickUp API key:
-   ```
-   CLICKUP_API_KEY=your_api_key_here
-   CLICKUP_TEAM_ID=9014297733
-   ```
-   Get your API key from ClickUp Settings > Apps.
-
-4. **Start Claude Code**:
+2. **Start Claude Code**:
    ```bash
    claude
    ```
-   The MCP server will connect automatically. Run `/mcp` to verify.
+
+3. **Authenticate with ClickUp**:
+   - Run `/mcp` in Claude Code
+   - Click the ClickUp authentication link
+   - Sign in with your ClickUp account and authorize access
+   - Return to Claude Code - you're now connected
+
+4. **Identify yourself**:
+   - On first run, the agent will ask for your name
+   - It matches you against the team roster to get your ClickUp ID
+   - Your info is saved locally in `.claude/user.json` for future sessions
 
 ### Daily Usage
 
@@ -69,8 +67,8 @@ aw-pm-agent/
 ├── CLAUDE.md                    # Main agent instructions
 ├── README.md                    # This file
 ├── .mcp.json                    # MCP server configuration
-├── .env.example                 # Environment template (copy to .env)
-├── .env                         # Your local secrets (gitignored)
+├── .claude/                     # Local config (gitignored)
+│   └── user.json                # Your identity (created on first run)
 ├── knowledge/                   # PM standards and documentation
 │   ├── pm-principles.md         # Core PM philosophy
 │   ├── task-creation.md         # How to create good tasks
@@ -103,17 +101,51 @@ When you discover improvements:
 ## Dependencies
 
 - **Claude Code CLI** (recommended) or Claude Desktop
-- **Node.js v18+** (for MCP server)
-- **ClickUp API key** with access to ArachnidWorks workspace
-- The ClickUp MCP uses [@taazkareem/clickup-mcp-server](https://github.com/taazkareem/clickup-mcp-server)
+- **ClickUp account** with access to ArachnidWorks workspace
 
 ## Troubleshooting
 
 ### MCP not connecting
 - Run `/mcp` in Claude Code to check status
-- Verify `.env` file exists with correct values
-- Ensure Node.js v18+ is installed: `node --version`
+- If it shows "Needs authentication", click the link to authenticate via OAuth
+- If ClickUp MCP is missing, the agent will add it automatically on startup
 
 ### Agent not following instructions
 - Make sure you're in the `aw-pm-agent` directory when starting Claude
 - Run `git pull` to get latest CLAUDE.md updates
+
+### Reset user identity
+- Delete `.claude/user.json` to be prompted again on next startup
+- Useful if you need to switch users or fix incorrect info
+
+## Future Enhancements
+
+Ideas for improving the PM Agent. These can be implemented as needs arise.
+
+### Template Reference
+Create `reference/templates.json` with common task patterns (blog post, landing page, newsletter, etc.) including pre-built subtask structures with typical estimates. Would allow AMs to say "create a blog post task" and get a ready-made structure.
+
+### Proactive Capacity Warnings
+Currently the agent can check availability when asked (e.g., "when does John have time next week?"). A future enhancement would be to proactively warn when assigning a task would push someone over capacity.
+
+### Time Estimate Validation
+Automatically warn when:
+- Subtask estimates exceed 4 hours (suggest breaking up)
+- A day's total assignments exceed 7 hours (capacity warning)
+
+### Quick Status Commands
+Support shorthand commands for common queries:
+- `overdue` → Show overdue tasks
+- `today` → Show tasks due today
+- `capacity [name] [day]` → Check workload
+
+### Estimate Reference Guide
+Add typical time estimates by task type to knowledge files:
+- Blog post: 2-3h draft + 30m review
+- Social graphics (set of 3): 1.5h
+- Landing page design: 3-4h
+- Landing page dev: 4-6h
+- Newsletter: 2h design + 1h dev
+
+### Quick Reference Section
+Add condensed reference info to top of CLAUDE.md (most-used clients, common estimates) to reduce file lookups and speed up responses.
