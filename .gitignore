@@ -17,3 +17,8 @@ Thumbs.db
 # Local overrides (if someone wants to customize locally)
 *.local.json
 *.local.md
+
+# Environment/secrets
+.env
+.env.*
+!.env.example

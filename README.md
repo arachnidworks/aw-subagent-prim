@@ -11,13 +11,49 @@ This agent helps Account Managers quickly create well-structured tasks in ClickU
 - Enforces standards (due dates, time estimates, assignees, statuses)
 - Creates parent tasks and subtasks with appropriate structure
 
-## Usage
+## Setup
 
-### With Claude Desktop + GitHub MCP
+### First-Time Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone git@github.com:arachnidworks/aw-pm-agent.git
+   cd aw-pm-agent
+   ```
+
+2. **Create your environment file**:
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Edit `.env`** with your ClickUp API key:
+   ```
+   CLICKUP_API_KEY=your_api_key_here
+   CLICKUP_TEAM_ID=9014297733
+   ```
+   Get your API key from ClickUp Settings > Apps.
+
+4. **Start Claude Code**:
+   ```bash
+   claude
+   ```
+   The MCP server will connect automatically. Run `/mcp` to verify.
+
+### Daily Usage
+
+```bash
+cd aw-pm-agent
+git pull              # Get latest agent updates
+claude                # Start the agent
+```
+
+### Alternative: Claude Desktop
 
 1. Connect this repository via GitHub MCP in Claude Desktop
 2. Enable the ClickUp MCP connector
 3. Start a conversation and ask Claude to create tasks
+
+Note: Claude Code CLI is recommended as it better respects the CLAUDE.md instructions.
 
 ### Example Prompts
 
@@ -32,6 +68,9 @@ This agent helps Account Managers quickly create well-structured tasks in ClickU
 aw-pm-agent/
 ├── CLAUDE.md                    # Main agent instructions
 ├── README.md                    # This file
+├── .mcp.json                    # MCP server configuration
+├── .env.example                 # Environment template (copy to .env)
+├── .env                         # Your local secrets (gitignored)
 ├── knowledge/                   # PM standards and documentation
 │   ├── pm-principles.md         # Core PM philosophy
 │   ├── task-creation.md         # How to create good tasks
@@ -63,6 +102,18 @@ When you discover improvements:
 
 ## Dependencies
 
-- Claude Desktop with GitHub MCP
-- ClickUp MCP connector (for task creation)
-- Access to ArachnidWorks ClickUp workspace
+- **Claude Code CLI** (recommended) or Claude Desktop
+- **Node.js v18+** (for MCP server)
+- **ClickUp API key** with access to ArachnidWorks workspace
+- The ClickUp MCP uses [@taazkareem/clickup-mcp-server](https://github.com/taazkareem/clickup-mcp-server)
+
+## Troubleshooting
+
+### MCP not connecting
+- Run `/mcp` in Claude Code to check status
+- Verify `.env` file exists with correct values
+- Ensure Node.js v18+ is installed: `node --version`
+
+### Agent not following instructions
+- Make sure you're in the `aw-pm-agent` directory when starting Claude
+- Run `git pull` to get latest CLAUDE.md updates
