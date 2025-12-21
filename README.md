@@ -149,3 +149,6 @@ Add typical time estimates by task type to knowledge files:
 
 ### Quick Reference Section
 Add condensed reference info to top of CLAUDE.md (most-used clients, common estimates) to reduce file lookups and speed up responses.
+
+### Multi-LLM Support
+Adapt the agent to work with other LLMs beyond Claude (e.g., Gemini, GPT). Would require abstracting the instructions into a format that works across different models and potentially using a different MCP client setup for each platform.
