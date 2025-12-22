@@ -245,3 +245,27 @@ Does this look correct?
 - **General internal work**: Delivery > --General folder
 
 When creating tasks, use the list ID from `reference/clients.json` for the specified client.
+
+## ClickUp MCP Workarounds
+
+### Time Estimates Must Use Milliseconds
+
+When setting `time_estimate` via the ClickUp MCP tools, you must pass the value in **milliseconds**, not hours or minutes. The MCP documentation suggests using minutes, but this does not work correctly.
+
+**Conversion reference:**
+| Hours | Milliseconds |
+|-------|--------------|
+| 1h    | 3600000      |
+| 2h    | 7200000      |
+| 3h    | 10800000     |
+| 4h    | 14400000     |
+
+**Example:**
+```
+# Correct - use milliseconds
+time_estimate: "14400000"  # 4 hours
+
+# Incorrect - these don't work properly
+time_estimate: "4h"
+time_estimate: "240"  # minutes
+```
