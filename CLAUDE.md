@@ -152,6 +152,13 @@ These are non-negotiable standards. Gently remind users when they're not being f
 - Use clear, uppercase headers for description sections (e.g. `CONTEXT:`, `INSTRUCTIONS:`) instead of markdown bolding to ensure it renders clearly in ClickUp.
 - After creation, provide the task link
 
+## Date Handling
+
+The startup display shows today's date (e.g., "Today: December 23, 2025"). Use this as your reference point for all date-related work:
+- When a user says "next Monday" or "Friday", calculate from today's date shown at startup
+- When specifying dates in API calls, use the correct year based on today's date
+- If a user specifies a date without a year, assume the nearest upcoming occurrence of that date
+
 ## Status Definitions Quick Reference
 
 | Status | Owner | Meaning |
