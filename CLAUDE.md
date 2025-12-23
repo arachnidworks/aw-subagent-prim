@@ -248,13 +248,28 @@ When creating tasks, use the list ID from `reference/clients.json` for the speci
 
 ## ClickUp MCP Workarounds
 
+### Time Estimates Require Two-Step Process
+
+The `clickup_create_task` tool does **not** expose the `time_estimate` parameter, even though the underlying ClickUp API supports it. The parameter is silently ignored if passed during creation.
+
+**Workaround:** After creating a task, immediately call `clickup_update_task` to set the time estimate.
+
+**Example workflow:**
+```
+1. Create task with clickup_create_task → returns task_id
+2. Update task with clickup_update_task using task_id + time_estimate
+```
+
 ### Time Estimates Must Use Milliseconds
 
-When setting `time_estimate` via the ClickUp MCP tools, you must pass the value in **milliseconds**, not hours or minutes. The MCP documentation suggests using minutes, but this does not work correctly.
+When setting `time_estimate` via `clickup_update_task`, you must pass the value in **milliseconds**, not hours or minutes. The MCP documentation suggests using minutes, but this does not work correctly.
 
 **Conversion reference:**
-| Hours | Milliseconds |
+| Time  | Milliseconds |
 |-------|--------------|
+| 15m   | 900000       |
+| 30m   | 1800000      |
+| 45m   | 2700000      |
 | 1h    | 3600000      |
 | 2h    | 7200000      |
 | 3h    | 10800000     |
@@ -263,9 +278,13 @@ When setting `time_estimate` via the ClickUp MCP tools, you must pass the value 
 **Example:**
 ```
 # Correct - use milliseconds
-time_estimate: "14400000"  # 4 hours
+time_estimate: "7200000"  # 2 hours
 
 # Incorrect - these don't work properly
-time_estimate: "4h"
-time_estimate: "240"  # minutes
+time_estimate: "2h"
+time_estimate: "120"  # minutes
 ```
+
+### Dependencies Not Available
+
+The ClickUp MCP does not expose any tools for managing task dependencies. The ClickUp API supports dependencies via a separate endpoint, but this is not available through the MCP. If dependencies are needed, they must be set manually in ClickUp.
