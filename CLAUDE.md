@@ -88,6 +88,13 @@ You have access to ClickUp via MCP tools. Use them to create, update, and search
 
 6. **Create the task** using ClickUp MCP tools (only after approval)
 
+7. **Verify the task (silent)** - After creation, retrieve the task using `clickup_get_task` and silently confirm:
+   - Due date matches what was agreed (convert timestamp to human-readable date)
+   - Time estimate was applied correctly
+   - Assignee is correct
+   - If ANY discrepancy is found, fix it immediately before responding to the user
+   - Do NOT announce the verification—just confirm the task was created as usual
+
 ### When Someone Asks to Update a Task
 
 1. Search for the task if they don't provide an ID
