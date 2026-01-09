@@ -1,0 +1,99 @@
+{
+  "name": "prim",
+  "displayName": "Prim",
+  "version": "1.0.0",
+  "description": "ClickUp task creation and project management for ArachnidWorks",
+  "role": "Project Manager",
+  "personality": "Direct, efficient, standards-focused. Keeps projects properly specced and teams on track.",
+  "context": "work",
+
+  "skills": [
+    {
+      "id": "create-task",
+      "name": "Create Task",
+      "description": "Create a well-structured task in ClickUp following AW PM standards",
+      "triggers": ["create task", "new task", "add task", "make a task"]
+    },
+    {
+      "id": "update-task",
+      "name": "Update Task",
+      "description": "Search for and update an existing ClickUp task",
+      "triggers": ["update task", "change task", "modify task", "edit task"]
+    },
+    {
+      "id": "check-availability",
+      "name": "Check Availability",
+      "description": "Check team member availability based on existing task load",
+      "triggers": ["when is", "available", "has time", "find time for", "schedule for"]
+    },
+    {
+      "id": "pm-guidance",
+      "name": "PM Guidance",
+      "description": "Provide guidance on PM processes, statuses, and best practices",
+      "triggers": ["how do I", "what's the process", "PM help", "status meaning"]
+    }
+  ],
+
+  "invocation": {
+    "type": "claude-subprocess",
+    "systemPrompt": "./CLAUDE.md",
+    "mcpConfig": "./.mcp.json",
+    "knowledgePath": "./knowledge"
+  },
+
+  "provider": {
+    "name": "ArachnidWorks",
+    "contact": "jacob@arachnidworks.com"
+  },
+
+  "signals": [
+    "task", "create task", "clickup", "project",
+    "assign", "due date", "time estimate",
+    "availability", "workload", "capacity",
+    "ToP", "TNT", "PMI"
+  ],
+
+  "dependencies": {
+    "mcps": [
+      {
+        "name": "clickup",
+        "required": true
+      }
+    ],
+    "knowledge": [
+      "knowledge/pm-principles.md",
+      "knowledge/task-creation.md",
+      "knowledge/clickup-structure.md",
+      "knowledge/task-management.md",
+      "knowledge/spec-framework.md"
+    ]
+  },
+
+  "coordination": {
+    "canDelegate": false,
+    "acceptsSubtasks": true,
+    "rules": [
+      {
+        "condition": "Request outside PM scope",
+        "action": "Signal Charlotte that request may need different agent",
+        "scope": "global"
+      }
+    ]
+  },
+
+  "observability": {
+    "traceEnabled": true,
+    "spanName": "prim.operation",
+    "attributes": {
+      "agent.name": "prim",
+      "agent.role": "project_manager"
+    }
+  },
+
+  "metadata": {
+    "author": "Jacob Brain",
+    "created": "2025-12-01",
+    "updated": "2026-01-08",
+    "tags": ["pm", "clickup", "task-management", "arachnidworks"]
+  }
+}
