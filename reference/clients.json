@@ -114,7 +114,8 @@
     "digital_marketing": { "name": "Digital Marketing", "list_id": "901413665508" },
     "general_it": { "name": "General IT", "list_id": "901407783769" },
     "team_events": { "name": "Team Events", "list_id": "901406939501" },
-    "temporary": { "name": "Temporary", "list_id": "901406939486" }
+    "temporary": { "name": "Temporary", "list_id": "901406939486" },
+    "personal": { "name": "Personal List", "list_id": "901413670230", "space": "Personal" }
   },
 
   "aliases": {
@@ -124,6 +125,9 @@
     "dublin roasters": "DUB",
     "frederick fence": "FFC",
     "arachnidworks": "AW",
-    "internal": "general_lists"
+    "internal": "general_lists",
+    "personal": "general_lists.personal",
+    "personal list": "general_lists.personal",
+    "personal tasks": "general_lists.personal"
   }
 }
