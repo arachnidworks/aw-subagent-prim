@@ -115,7 +115,8 @@
     "general_it": { "name": "General IT", "list_id": "901407783769" },
     "team_events": { "name": "Team Events", "list_id": "901406939501" },
     "temporary": { "name": "Temporary", "list_id": "901406939486" },
-    "personal": { "name": "Personal List", "list_id": "901413670230", "space": "Personal" }
+    "personal": { "name": "Personal List", "list_id": "901413670230", "space": "Personal" },
+    "financial_actions": { "name": "Financial Actions", "list_id": "901413392202", "space": "Administration" }
   },
 
   "aliases": {
